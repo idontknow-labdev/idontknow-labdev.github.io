@@ -31,6 +31,11 @@
             max-width: 400px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         h1 {
@@ -53,6 +58,14 @@
             line-height: 1.6;
             margin: 20px 0;
             padding: 0 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .btn {
@@ -65,12 +78,20 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-si {
+            transition: all 0.3s ease;
             background: #ff758c;
             color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .choice-btn {
+            display: inline-block;
+            width: 45%;
+            margin: 10px;
+            padding: 15px 20px;
         }
 
         .btn-no {
@@ -85,61 +106,125 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
-        #finalMessage {
-            color: #ff758c;
-            font-size: 20px;
-            line-height: 1.6;
+        .choices {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             margin-top: 20px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <div id="initialContent">
+        <!-- Secuencia de mensajes -->
+        <div id="sequence">
+            <p class="message" data-step="1">
+                Hola mi Koalito!... 
+            </p>
+            <p class="message" data-step="2">
+                Sabes... Hay algo muy importante que quiero decirte... 💭
+            </p>
+            <p class="message" data-step="3">
+                He estado pensando mucho en ti últimamente... ✨
+            </p>
+            <p class="message" data-step="4">
+                En lo especial que eres para mí... 💫
+            </p>
+            <p class="message" data-step="5">
+                En los bonitos momentos... ⭐
+            </p>
+            <p class="message" data-step="6">
+                Y me di cuenta de algo... 💝
+            </p>
+            <button class="btn" id="nextBtn" onclick="nextMessage()">Continuar →</button>
+        </div>
+
+        <!-- Propuesta final -->
+        <div id="proposal" class="hidden">
             <h1>Para mi Koalito</h1>
             <div class="heart">❤️</div>
-            <p class="message">
+            <p class="message show">
                 Cada día que paso contigo es especial.<br>
                 ¿Me harías el honor de ser mi San Valentín?
             </p>
-            <button class="btn btn-si" onclick="showFinal()">¡Sí! 💝</button>
-            <button class="btn btn-no" id="noBtn" onclick="moveButton()">No 💔</button>
+            <div class="choices">
+                <button class="btn choice-btn" onclick="showFinal()">¡Sí! 💝</button>
+                <button class="btn choice-btn btn-no" id="noBtn" onclick="moveButton(this)">No 💔</button>
+            </div>
         </div>
 
-        <div id="successContent" class="hidden">
-            <h1>¡Gracias mi hermoso Koalito! ❤️</h1>
+        <!-- Mensaje final -->
+        <div id="finalMessage" class="hidden">
+            <h1>¡Gracias mi hermoso Koalita hermoso!🐨❤️</h1>
             <div class="heart">💝</div>
-            <p class="message">
+            <p class="message show">
                 ¡Me has hecho la persona más feliz!<br>
-                Te prometo hacerte muy feliz.<br>
+                Te prometo hacerte muy feliz<br>
                 Te amo demasiado mi amor. ❤️
             </p>
         </div>
     </div>
 
     <script>
-        function showFinal() {
-            document.getElementById('initialContent').classList.add('hidden');
-            document.getElementById('successContent').classList.remove('hidden');
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        function showMessage(step) {
+            document.querySelector(`[data-step="${step}"]`).classList.add('show');
         }
 
-        function moveButton() {
-            const btn = document.getElementById('noBtn');
+        function nextMessage() {
+            if (currentStep <= totalSteps) {
+                showMessage(currentStep);
+                currentStep++;
+                
+                if (currentStep > totalSteps) {
+                    setTimeout(() => {
+                        document.getElementById('sequence').classList.add('hidden');
+                        document.getElementById('proposal').classList.remove('hidden');
+                        document.getElementById('proposal').classList.add('fade-in');
+                    }, 1500);
+                }
+            }
+        }
+
+        function showFinal() {
+            document.getElementById('proposal').classList.add('hidden');
+            document.getElementById('finalMessage').classList.remove('hidden');
+            document.getElementById('finalMessage').classList.add('fade-in');
+        }
+
+        function moveButton(button) {
             const card = document.querySelector('.card');
             const cardRect = card.getBoundingClientRect();
+            const btnRect = button.getBoundingClientRect();
             
-            const maxX = cardRect.width - btn.offsetWidth;
-            const maxY = cardRect.height - btn.offsetHeight;
+            const maxX = cardRect.width - btnRect.width;
+            const maxY = cardRect.height - btnRect.height;
             
             const randomX = Math.random() * maxX;
             const randomY = Math.random() * maxY;
             
-            btn.style.position = 'absolute';
-            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            button.style.position = 'absolute';
+            button.style.transform = `translate(${randomX}px, ${randomY}px)`;
         }
+
+        // Mostrar el primer mensaje al cargar
+        window.onload = () => {
+            showMessage(1);
+        };
     </script>
 </body>
 </html>
