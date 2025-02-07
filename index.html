@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para mi Koalito ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff758c 0%, #ff7eb3 100%);
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ff758c;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .heart {
+            font-size: 60px;
+            margin: 20px 0;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        .message {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+
+        .btn {
+            display: block;
+            width: 80%;
+            margin: 15px auto;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-si {
+            background: #ff758c;
+            color: white;
+        }
+
+        .btn-no {
+            background: #f8f9fa;
+            color: #ff758c;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #finalMessage {
+            color: #ff758c;
+            font-size: 20px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div id="initialContent">
+            <h1>Para mi Koalito</h1>
+            <div class="heart">❤️</div>
+            <p class="message">
+                Cada día que paso contigo es especial.<br>
+                ¿Me harías el honor de ser mi San Valentín?
+            </p>
+            <button class="btn btn-si" onclick="showFinal()">¡Sí! 💝</button>
+            <button class="btn btn-no" id="noBtn" onclick="moveButton()">No 💔</button>
+        </div>
+
+        <div id="successContent" class="hidden">
+            <h1>¡Gracias mi hermoso Koalito! ❤️</h1>
+            <div class="heart">💝</div>
+            <p class="message">
+                ¡Me has hecho la persona más feliz!<br>
+                Te prometo hacerte muy feliz.<br>
+                Te amo demasiado mi amor. ❤️
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showFinal() {
+            document.getElementById('initialContent').classList.add('hidden');
+            document.getElementById('successContent').classList.remove('hidden');
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const card = document.querySelector('.card');
+            const cardRect = card.getBoundingClientRect();
+            
+            const maxX = cardRect.width - btn.offsetWidth;
+            const maxY = cardRect.height - btn.offsetHeight;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.position = 'absolute';
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+    </script>
+</body>
+</html>
