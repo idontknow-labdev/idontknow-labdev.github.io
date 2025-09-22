@@ -314,7 +314,7 @@
         }
         
         /* Estilos para el reproductor de audio */
-        .audio-player {
+        .audio-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -331,16 +331,17 @@
             transition: all 0.3s ease;
         }
         
-        .audio-player:hover {
+        .audio-container:hover {
             background: rgba(255, 255, 255, 0.95);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
         
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .audio-title {
+            font-size: 14px;
+            color: #2d3436;
+            font-weight: 600;
+            margin-right: 10px;
         }
         
         .audio-btn {
@@ -388,20 +389,13 @@
             cursor: pointer;
         }
         
-        .song-title {
-            font-size: 14px;
-            color: #2d3436;
-            font-weight: 600;
-            margin-left: 5px;
-        }
-        
         /* Botón de activación de música */
         .music-consent {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border: 2px solid #f39c12;
             border-radius: 30px;
             padding: 12px 20px;
@@ -436,14 +430,14 @@
         }
         
         @media (max-width: 768px) {
-            .audio-player {
+            .audio-container {
                 bottom: 10px;
                 right: 10px;
                 left: 10px;
                 justify-content: center;
             }
             
-            .song-title {
+            .audio-title {
                 display: none;
             }
             
@@ -490,7 +484,7 @@
                 bottom: 60px;
             }
             
-            .audio-player {
+            .audio-container {
                 padding: 8px 12px;
             }
             
@@ -504,7 +498,7 @@
     <!-- Banner de consentimiento para audio -->
     <div class="music-consent" id="musicConsent">
         <p>¿Te gustaría escuchar música de fondo?</p>
-        <button class="consent-btn" id="activateMusic">Activar música</button>
+        <button class="consent-btn" onclick="activateMusic()">Activar música</button>
     </div>
 
     <div class="header">
@@ -539,16 +533,20 @@
     </div>
 
     <!-- Reproductor de audio (inicialmente oculto) -->
-    <div class="audio-player" id="audioPlayer" style="display: none;">
-        <div class="audio-controls">
-            <button class="audio-btn" id="playPauseBtn">▶️</button>
-        </div>
+    <div class="audio-container" id="audioPlayer" style="display: none;">
+        <div class="audio-title">See You Again</div>
+        <button class="audio-btn" id="playPauseBtn" onclick="togglePlayPause()">▶️</button>
         <div class="volume-control">
             <span>🔊</span>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.7">
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.7" oninput="changeVolume(this.value)">
         </div>
-        <div class="song-title">See You Again</div>
     </div>
+
+    <!-- Elemento de audio (oculto) -->
+    <audio id="backgroundMusic" loop>
+        <source src="SeeYouAgain.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
     <div class="message" id="messageBox">
         <button class="close-btn" onclick="closeMessage()">×</button>
@@ -558,6 +556,7 @@
     <div class="hearts" id="hearts"></div>
 
     <script>
+        // Mensajes para los pétalos
         const messages = [
             "Mi Koalita hermoso, eres la luz de mis días y la calma de mis noches. Te amo infinitamente 💛",
             "Eres mi persona favorita en todo el mundo, mi dulce Koalita. No puedo imaginar mi vida sin ti 🌻",
@@ -574,63 +573,55 @@
         let allPetalsClicked = false;
         
         // Variables para el control de audio
-        let audio = null;
+        const audio = document.getElementById('backgroundMusic');
         let isPlaying = false;
 
-        function initAudio() {
-            // Crear elemento de audio
-            audio = new Audio('SeeYouAgain.mp3');
-            audio.volume = 0.7;
-            audio.loop = true;
-            
-            // Configurar eventos
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const volumeSlider = document.getElementById('volumeSlider');
-            
-            playPauseBtn.addEventListener('click', togglePlayPause);
-            volumeSlider.addEventListener('input', () => {
-                audio.volume = volumeSlider.value;
-            });
-            
-            audio.addEventListener('ended', () => {
-                isPlaying = false;
-                updatePlayButton();
-            });
-            
-            // Mostrar el reproductor de audio
+        // Función para activar la música
+        function activateMusic() {
+            document.getElementById('musicConsent').style.display = 'none';
             document.getElementById('audioPlayer').style.display = 'flex';
             
-            // Intentar reproducir
-            togglePlayPause();
+            // Intentar reproducir la música
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // La reproducción comenzó exitosamente
+                    isPlaying = true;
+                    updatePlayButton();
+                }).catch(error => {
+                    // La reproducción falló, mostrar mensaje
+                    alert("Para reproducir música, haz clic en cualquier parte de la página primero.");
+                    isPlaying = false;
+                    updatePlayButton();
+                });
+            }
         }
         
+        // Función para alternar entre play y pause
         function togglePlayPause() {
-            if (!audio) return;
-            
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
             } else {
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log("Error al reproducir audio:", error);
-                        isPlaying = false;
-                        updatePlayButton();
-                    });
-                }
+                audio.play();
                 isPlaying = true;
             }
             updatePlayButton();
         }
         
+        // Función para actualizar el botón de play/pause
         function updatePlayButton() {
             const playPauseBtn = document.getElementById('playPauseBtn');
-            if (playPauseBtn) {
-                playPauseBtn.innerHTML = isPlaying ? '⏸️' : '▶️';
-            }
+            playPauseBtn.innerHTML = isPlaying ? '⏸️' : '▶️';
+        }
+        
+        // Función para cambiar el volumen
+        function changeVolume(volume) {
+            audio.volume = volume;
         }
 
+        // Función para mostrar mensajes
         function showMessage(index) {
             const messageBox = document.getElementById('messageBox');
             const messageText = document.getElementById('messageText');
@@ -656,11 +647,13 @@
             }
         }
 
+        // Función para cerrar mensajes
         function closeMessage() {
             const messageBox = document.getElementById('messageBox');
             messageBox.classList.remove('show');
         }
 
+        // Función para crear corazones animados
         function createHearts() {
             const heartsContainer = document.getElementById('hearts');
             
@@ -695,17 +688,17 @@
             }
         });
         
-        // Configurar el botón de activación de música
-        document.getElementById('activateMusic').addEventListener('click', function() {
-            document.getElementById('musicConsent').style.display = 'none';
-            initAudio();
-        });
-        
-        // Verificar si el usuario ya ha dado consentimiento anteriormente
-        window.addEventListener('load', function() {
-            if (localStorage.getItem('audioConsent') === 'given') {
-                document.getElementById('musicConsent').style.display = 'none';
-                initAudio();
+        // Permitir que la música se reproduzca al hacer clic en cualquier parte de la página
+        document.body.addEventListener('click', function() {
+            if (!isPlaying && document.getElementById('musicConsent').style.display === 'none') {
+                // Si el usuario ya dio consentimiento pero la música no está reproduciendo
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isPlaying = true;
+                        updatePlayButton();
+                    });
+                }
             }
         });
     </script>
