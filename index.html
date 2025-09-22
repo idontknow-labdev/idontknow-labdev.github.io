@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi Koalita Hermoso ♥️🐨 </title>
+    <title>Para mi Koalita Hermoso ♥️🐨</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
         
@@ -20,13 +20,14 @@
             background: linear-gradient(135deg, #ffeaa7, #fdcb6e, #e17055, #fd79a8);
             background-size: 400% 400%;
             animation: gradientShift 8s ease infinite;
-            font-family: 'Verdana', Verdana;
+            font-family: 'Verdana', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
             touch-action: manipulation;
+            position: relative;
         }
 
         @keyframes gradientShift {
@@ -317,7 +318,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 30px;
             padding: 10px 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -394,6 +395,46 @@
             margin-left: 5px;
         }
         
+        /* Botón de activación de música */
+        .music-consent {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #f39c12;
+            border-radius: 30px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .music-consent p {
+            margin: 0;
+            font-weight: 600;
+            color: #2d3436;
+        }
+        
+        .consent-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        
+        .consent-btn:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+        
         @media (max-width: 768px) {
             .audio-player {
                 bottom: 10px;
@@ -404,6 +445,13 @@
             
             .song-title {
                 display: none;
+            }
+            
+            .music-consent {
+                top: 10px;
+                width: 90%;
+                flex-direction: column;
+                text-align: center;
             }
         }
         
@@ -453,6 +501,12 @@
     </style>
 </head>
 <body>
+    <!-- Banner de consentimiento para audio -->
+    <div class="music-consent" id="musicConsent">
+        <p>¿Te gustaría escuchar música de fondo?</p>
+        <button class="consent-btn" id="activateMusic">Activar música</button>
+    </div>
+
     <div class="header">
         <h1>Para mi Koalita Hermoso 💛</h1>
         <p>21 de Septiembre - Una flor especial para ti</p>
@@ -484,8 +538,8 @@
         <p>Toca cada pétalo para descubrir un mensaje especial 💛</p>
     </div>
 
-    <!-- Reproductor de audio -->
-    <div class="audio-player">
+    <!-- Reproductor de audio (inicialmente oculto) -->
+    <div class="audio-player" id="audioPlayer" style="display: none;">
         <div class="audio-controls">
             <button class="audio-btn" id="playPauseBtn">▶️</button>
         </div>
@@ -529,21 +583,6 @@
             audio.volume = 0.7;
             audio.loop = true;
             
-            // Intentar reproducir automáticamente (puede requerir interacción del usuario en algunos navegadores)
-            const playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    // La reproducción automática falló, esperar a la interacción del usuario
-                    console.log("La reproducción automática requiere interacción del usuario.");
-                    isPlaying = false;
-                    updatePlayButton();
-                });
-            } else {
-                isPlaying = true;
-                updatePlayButton();
-            }
-            
             // Configurar eventos
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
@@ -557,16 +596,29 @@
                 isPlaying = false;
                 updatePlayButton();
             });
+            
+            // Mostrar el reproductor de audio
+            document.getElementById('audioPlayer').style.display = 'flex';
+            
+            // Intentar reproducir
+            togglePlayPause();
         }
         
         function togglePlayPause() {
+            if (!audio) return;
+            
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
             } else {
-                audio.play().catch(error => {
-                    console.log("Error al reproducir audio:", error);
-                });
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Error al reproducir audio:", error);
+                        isPlaying = false;
+                        updatePlayButton();
+                    });
+                }
                 isPlaying = true;
             }
             updatePlayButton();
@@ -574,7 +626,9 @@
         
         function updatePlayButton() {
             const playPauseBtn = document.getElementById('playPauseBtn');
-            playPauseBtn.innerHTML = isPlaying ? '⏸️' : '▶️';
+            if (playPauseBtn) {
+                playPauseBtn.innerHTML = isPlaying ? '⏸️' : '▶️';
+            }
         }
 
         function showMessage(index) {
@@ -641,8 +695,19 @@
             }
         });
         
-        // Inicializar el audio cuando la página cargue
-        window.addEventListener('load', initAudio);
+        // Configurar el botón de activación de música
+        document.getElementById('activateMusic').addEventListener('click', function() {
+            document.getElementById('musicConsent').style.display = 'none';
+            initAudio();
+        });
+        
+        // Verificar si el usuario ya ha dado consentimiento anteriormente
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('audioConsent') === 'given') {
+                document.getElementById('musicConsent').style.display = 'none';
+                initAudio();
+            }
+        });
     </script>
 </body>
 </html>
