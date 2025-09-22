@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi Koalita Hermoso ♥️🐨</title>
+    <title>Para mi Koalita Hermoso ♥️🐨 </title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
         
@@ -13,6 +13,8 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+      
+      
         body {
             margin: 0;
             padding: 20px;
@@ -20,14 +22,13 @@
             background: linear-gradient(135deg, #ffeaa7, #fdcb6e, #e17055, #fd79a8);
             background-size: 400% 400%;
             animation: gradientShift 8s ease infinite;
-            font-family: 'Verdana', sans-serif;
+          font-family: 'Verdana', Verdana;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
             touch-action: manipulation;
-            position: relative;
         }
 
         @keyframes gradientShift {
@@ -313,142 +314,6 @@
             font-weight: 600;
         }
         
-        /* Estilos para el reproductor de audio */
-        .audio-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 10px 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-            border: 2px solid #f39c12;
-            transition: all 0.3s ease;
-        }
-        
-        .audio-container:hover {
-            background: rgba(255, 255, 255, 0.95);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        }
-        
-        .audio-title {
-            font-size: 14px;
-            color: #2d3436;
-            font-weight: 600;
-            margin-right: 10px;
-        }
-        
-        .audio-btn {
-            background: #f39c12;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            transition: all 0.2s ease;
-        }
-        
-        .audio-btn:hover {
-            background: #e67e22;
-            transform: scale(1.1);
-        }
-        
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .volume-slider {
-            -webkit-appearance: none;
-            width: 80px;
-            height: 5px;
-            border-radius: 5px;
-            background: #ddd;
-            outline: none;
-        }
-        
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: #f39c12;
-            cursor: pointer;
-        }
-        
-        /* Botón de activación de música */
-        .music-consent {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #f39c12;
-            border-radius: 30px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-        }
-        
-        .music-consent p {
-            margin: 0;
-            font-weight: 600;
-            color: #2d3436;
-        }
-        
-        .consent-btn {
-            background: #f39c12;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s ease;
-        }
-        
-        .consent-btn:hover {
-            background: #e67e22;
-            transform: scale(1.05);
-        }
-        
-        @media (max-width: 768px) {
-            .audio-container {
-                bottom: 10px;
-                right: 10px;
-                left: 10px;
-                justify-content: center;
-            }
-            
-            .audio-title {
-                display: none;
-            }
-            
-            .music-consent {
-                top: 10px;
-                width: 90%;
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-        
         @media (max-width: 480px) {
             .flower-wrapper {
                 width: 280px;
@@ -483,24 +348,10 @@
             .leaf {
                 bottom: 60px;
             }
-            
-            .audio-container {
-                padding: 8px 12px;
-            }
-            
-            .volume-slider {
-                width: 60px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Banner de consentimiento para audio -->
-    <div class="music-consent" id="musicConsent">
-        <p>¿Te gustaría escuchar música de fondo?</p>
-        <button class="consent-btn" onclick="activateMusic()">Activar música</button>
-    </div>
-
     <div class="header">
         <h1>Para mi Koalita Hermoso 💛</h1>
         <p>21 de Septiembre - Una flor especial para ti</p>
@@ -532,22 +383,6 @@
         <p>Toca cada pétalo para descubrir un mensaje especial 💛</p>
     </div>
 
-    <!-- Reproductor de audio (inicialmente oculto) -->
-    <div class="audio-container" id="audioPlayer" style="display: none;">
-        <div class="audio-title">See You Again</div>
-        <button class="audio-btn" id="playPauseBtn" onclick="togglePlayPause()">▶️</button>
-        <div class="volume-control">
-            <span>🔊</span>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="0.7" oninput="changeVolume(this.value)">
-        </div>
-    </div>
-
-    <!-- Elemento de audio (oculto) -->
-    <audio id="backgroundMusic" loop>
-        <source src="SeeYouAgain.mp3" type="audio/mp3">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
-
     <div class="message" id="messageBox">
         <button class="close-btn" onclick="closeMessage()">×</button>
         <div id="messageText"></div>
@@ -556,72 +391,21 @@
     <div class="hearts" id="hearts"></div>
 
     <script>
-        // Mensajes para los pétalos
         const messages = [
-            "Mi Koalita hermoso, eres la luz de mis días y la calma de mis noches. Te amo infinitamente 💛",
-            "Eres mi persona favorita en todo el mundo, mi dulce Koalita. No puedo imaginar mi vida sin ti 🌻",
-            "Tu sonrisa es mi lugar favorito, mi amor. Cada día contigo es un regalo hermoso 💕",
-            "Mi corazón late solo por ti, mi Koalita precioso. Eres mi hogar y mi aventura 🏠",
-            "Contigo he encontrado mi para siempre, mi amor. Eres perfecto tal como eres 🌟",
+            "Mi Koalita hermoso, eres la luz de mis días y la calma de mis noches... Te amo infinitamente 💛",
+            "Eres mi persona favorita en todo el mundo, mi dulce Koalita... No puedo imaginar mi vida sin ti 🌻",
+            "Tu sonrisa es mi lugar favorito, mi amor... Cada día contigo es un regalo hermoso 💕",
+            "Mi corazón late solo por ti, mi Koalita precioso... Eres mi hogar y mi aventura 🏠",
+            "Contigo he encontrado mi para siempre, mi amor... Eres perfecto tal como eres 🌟",
             "Mi Koalita lindo, eres mi sol en los días nublados y mi estrella en las noches oscuras ☀️",
             "Te amo más que a las palabras, más que a los números, más que al infinito mismo 🌙",
-            "Eres mi chico hermoso, mi compañero de vida, mi alma gemela. Te adoro completamente 💖",
-            "¡Haz clic en cada pétalo para leer todos los mensajes de amor que tengo para ti, mi Koalita! 🌺"
+            "Eres mi chico hermoso, mi compañero de vida, mi alma gemela :3... Te adoro completamente 💖",
+            "¡Haz clic en cada pétalo para leer todos los mensajes de amor que tengo para ti mi Koalita Wapo! 🌺"
         ];
         
         const clickedPetals = new Set();
         let allPetalsClicked = false;
-        
-        // Variables para el control de audio
-        const audio = document.getElementById('backgroundMusic');
-        let isPlaying = false;
 
-        // Función para activar la música
-        function activateMusic() {
-            document.getElementById('musicConsent').style.display = 'none';
-            document.getElementById('audioPlayer').style.display = 'flex';
-            
-            // Intentar reproducir la música
-            const playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // La reproducción comenzó exitosamente
-                    isPlaying = true;
-                    updatePlayButton();
-                }).catch(error => {
-                    // La reproducción falló, mostrar mensaje
-                    alert("Para reproducir música, haz clic en cualquier parte de la página primero.");
-                    isPlaying = false;
-                    updatePlayButton();
-                });
-            }
-        }
-        
-        // Función para alternar entre play y pause
-        function togglePlayPause() {
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-            } else {
-                audio.play();
-                isPlaying = true;
-            }
-            updatePlayButton();
-        }
-        
-        // Función para actualizar el botón de play/pause
-        function updatePlayButton() {
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            playPauseBtn.innerHTML = isPlaying ? '⏸️' : '▶️';
-        }
-        
-        // Función para cambiar el volumen
-        function changeVolume(volume) {
-            audio.volume = volume;
-        }
-
-        // Función para mostrar mensajes
         function showMessage(index) {
             const messageBox = document.getElementById('messageBox');
             const messageText = document.getElementById('messageText');
@@ -639,7 +423,7 @@
                 if (clickedPetals.size >= 8 && !allPetalsClicked) {
                     allPetalsClicked = true;
                     setTimeout(() => {
-                        messageText.innerHTML = "¡Has descubierto todos mis mensajes! Eres el amor de mi vida, mi Koalita 💛";
+                        messageText.innerHTML = "¡Has descubierto todos mis mensajes mi niño :3! Eres el amor de mi vida, mi Koalita 💛";
                         messageBox.classList.add('show');
                         createHearts();
                     }, 1000);
@@ -647,13 +431,11 @@
             }
         }
 
-        // Función para cerrar mensajes
         function closeMessage() {
             const messageBox = document.getElementById('messageBox');
             messageBox.classList.remove('show');
         }
 
-        // Función para crear corazones animados
         function createHearts() {
             const heartsContainer = document.getElementById('hearts');
             
@@ -685,20 +467,6 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeMessage();
-            }
-        });
-        
-        // Permitir que la música se reproduzca al hacer clic en cualquier parte de la página
-        document.body.addEventListener('click', function() {
-            if (!isPlaying && document.getElementById('musicConsent').style.display === 'none') {
-                // Si el usuario ya dio consentimiento pero la música no está reproduciendo
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        isPlaying = true;
-                        updatePlayButton();
-                    });
-                }
             }
         });
     </script>
