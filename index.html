@@ -3,472 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi Koalita Hermoso ♥️🐨 </title>
+    <title>Feliz Cumpleaños Cami 💕</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
-        
         * {
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-      
-      
-        body {
             margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffeaa7, #fdcb6e, #e17055, #fd79a8);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-          font-family: 'Verdana', Verdana;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            touch-action: manipulation;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe5f0 50%, #ffd6e8 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            position: relative;
         }
 
         .header {
             text-align: center;
             margin-bottom: 30px;
-            z-index: 10;
-            max-width: 90%;
+            animation: fadeInDown 1s ease;
         }
 
         .header h1 {
-            color: #2d3436;
-            font-size: clamp(2rem, 8vw, 3.5rem);
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-            animation: pulse 2s ease-in-out infinite alternate;
+            color: #ff69b4;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
         }
 
-        .header p {
-            color: #2d3436;
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            margin: 10px 0;
-            font-weight: 600;
+        .header .subtitle {
+            color: #ff85c0;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .animals {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 3em;
+            animation: bounce 2s infinite;
+        }
+
+        .message {
+            background: linear-gradient(135deg, #fff0f6 0%, #ffe6f0 100%);
+            padding: 30px;
+            border-radius: 20px;
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.1em;
+            margin: 20px 0;
+            border: 3px solid #ffb6d9;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .message p {
+            margin-bottom: 15px;
+        }
+
+        .heart-container {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 2em;
+            animation: pulse 1.5s infinite;
+        }
+
+        .tulips {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            font-size: 2.5em;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #ff69b4;
+            font-size: 1.5em;
+            font-weight: bold;
+            animation: fadeIn 2s ease;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        .flower-wrapper {
-            position: relative;
-            width: min(320px, 80vw);
-            height: min(380px, 95vw);
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .flower {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .petals-container {
-            position: absolute;
-            width: 280px;
-            height: 280px;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-        }
-
-        .petal {
-            position: absolute;
-            width: 80px;
-            height: 120px;
-            background: linear-gradient(to bottom, #fdcb6e, #f39c12);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            top: 50%;
-            left: 50%;
-            transform-origin: center 180px;
-            z-index: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .petal:hover, .petal:active {
-            transform: translate(-50%, -50%) scale(1.20) rotate(var(--rotate));
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            background: linear-gradient(to bottom, #f39c12, #e67e22);
-            z-index: 5;
-        }
-
-        /* Posicionamiento de pétalos */
-        .petal:nth-child(1) { 
-            --rotate: 0deg;
-            transform: translate(-50%, -50%) rotate(0deg);
-        }
-        .petal:nth-child(2) { 
-            --rotate: 45deg;
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
-        .petal:nth-child(3) { 
-            --rotate: 90deg;
-            transform: translate(-50%, -50%) rotate(90deg);
-        }
-        .petal:nth-child(4) { 
-            --rotate: 135deg;
-            transform: translate(-50%, -50%) rotate(135deg);
-        }
-        .petal:nth-child(5) { 
-            --rotate: 180deg;
-            transform: translate(-50%, -50%) rotate(180deg);
-        }
-        .petal:nth-child(6) { 
-            --rotate: 225deg;
-            transform: translate(-50%, -50%) rotate(225deg);
-        }
-        .petal:nth-child(7) { 
-            --rotate: 270deg;
-            transform: translate(-50%, -50%) rotate(270deg);
-        }
-        .petal:nth-child(8) { 
-            --rotate: 315deg;
-            transform: translate(-50%, -50%) rotate(315deg);
-        }
-
-        .center-container {
-            position: absolute;
-            top: 140px;
-            transform: translateY(30%);
-            width: 150px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .center {
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, #8b4513, #d2691e, #cd853f);
-            border-radius: 50%;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fdcb6e;
-            font-size: 0.9rem;
-            text-align: center;
-            padding: 10px;
-            animation: centerPulse 3s infinite ease-in-out;
-        }
-
-        @keyframes centerPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .center:hover {
-            transform: scale(1.15);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
-        .stem {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 150px;
-            background: linear-gradient(to bottom, #27ae60, #2ecc71, #27ae60);
-            border-radius: 4px;
-            z-index: 1;
-        }
-
-        .leaf {
-            position: absolute;
-            bottom: 80px;
-            left: -20px;
-            width: 40px;
-            height: 30px;
-            background: #27ae60;
-            border-radius: 0 100% 0 100%;
-            transform: rotate(-30deg);
-        }
-
-        .leaf:nth-child(2) {
-            right: -20px;
-            left: auto;
-            transform: rotate(30deg) scaleX(-1);
-        }
-        
-        .message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: rgba(255,255,255,0.98);
-            border: 3px solid #f39c12;
-            border-radius: 20px;
-            padding: 30px;
-            font-size: clamp(1.4rem, 4vw, 2rem);
-            color: #2d3436;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            max-width: 90%;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            line-height: 1.4;
-        }
-
-        .message.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            background: #e17055;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .close-btn:hover {
-            background: #d63031;
-            transform: scale(1.1);
-        }
-
-        .hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        .heart {
-            position: absolute;
-            color: #e84393;
-            font-size: 20px;
-            animation: floatHeart 3s ease-out forwards;
-            pointer-events: none;
-        }
-
-        @keyframes floatHeart {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 1;
+            0%, 100% {
+                transform: scale(1);
             }
             50% {
-                transform: translateY(50vh) scale(1);
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
                 opacity: 1;
+                transform: scale(1);
             }
-            100% {
-                transform: translateY(-20vh) scale(0);
-                opacity: 0;
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
             }
         }
-        
-        .instructions {
-            margin-top: 20px;
-            text-align: center;
-            color: #2d3436;
-            font-size: clamp(1rem, 4vw, 1.2rem);
-            max-width: 90%;
-            font-weight: 600;
+
+        .emoticon {
+            display: inline-block;
+            color: #ff69b4;
+            font-weight: bold;
         }
-        
-        @media (max-width: 480px) {
-            .flower-wrapper {
-                width: 280px;
-                height: 340px;
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
             }
             
-            .petals-container {
-                width: 240px;
-                height: 240px;
+            .header h1 {
+                font-size: 2em;
             }
             
-            .petal {
-                width: 70px;
-                height: 100px;
-                transform-origin: center 150px;
-            }
-            
-            .center-container {
-                top: 120px;
-            }
-            
-            .center {
-                width: 80px;
-                height: 80px;
-                font-size: 0.7rem;
-            }
-            
-            .stem {
-                height: 120px;
-            }
-            
-            .leaf {
-                bottom: 60px;
+            .message {
+                font-size: 1em;
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Para mi Koalita Hermoso 💛</h1>
-        <p>21 de Septiembre - Una flor especial para ti</p>
-    </div>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 ¡Feliz Cumpleaños Cami! 🎉</h1>
+            <div class="subtitle">✨ 20 añitos de pura lindura ✨</div>
+        </div>
 
-    <div class="flower-wrapper">
-        <div class="flower">
-            <div class="stem">
-                <div class="leaf"></div>
-                <div class="leaf"></div>
-            </div>
-            <div class="petals-container">
-                <div class="petal" onclick="showMessage(0)"></div>
-                <div class="petal" onclick="showMessage(1)"></div>
-                <div class="petal" onclick="showMessage(2)"></div>
-                <div class="petal" onclick="showMessage(3)"></div>
-                <div class="petal" onclick="showMessage(4)"></div>
-                <div class="petal" onclick="showMessage(5)"></div>
-                <div class="petal" onclick="showMessage(6)"></div>
-                <div class="petal" onclick="showMessage(7)"></div>
-            </div>
-            <div class="center-container">
-                <div class="center" onclick="showMessage(8)">Tócame 💛</div>
-            </div>
+        <div class="animals">
+            🦭 🐼 🦭
+        </div>
+
+        <div class="message">
+            <p>Mi Cami preciosa, quería hacer algo más especial para ti en este día tan importante <span class="emoticon">(●'◡'●)</span> 💕, porque aunque ya te dije muchas cosas lindas, siento que mi corazón todavía tiene tanto más que expresarte y no quería que este día pasara sin que supieras todo lo que significas para mí <span class="emoticon">:3</span></p>
+
+            <p>Sabes? A veces me pongo a pensar en todo lo que hemos compartido y no puedo evitar sonreír como tonto jeje... cada conversación contigo, cada risita tuya que escucho, cada momento en el que me cuentas algo que te pasó o me compartes lo que estás sintiendo... todo eso se ha convertido en los momentos más bonitos de mis días <span class="emoticon">&lt;3</span>, literalmente me haces tan feliz sin siquiera intentarlo, solo con ser tú, con esa forma tan linda que tienes de ser, de hablar, de reírte, de preocuparte por mí...</p>
+
+            <p>Me encanta cuando me mandas fotitos de las cosas que haces, cuando me cuentas sobre tu día, cuando compartimos nuestras canciones favoritas, cuando vemos cosas juntos aunque sea a la distancia... cada una de esas pequeñas cosas que para otros pueden parecer simples, para mí son tesoros enormes que guardo en mi corazón <span class="emoticon">T.T</span> 💕, porque vienen de ti, de mi persona favorita en todo el mundo...</p>
+
+            <p>Y es que Cami, tú eres tan especial... eres de las personas más lindas, más tiernas, más genuinas que he conocido en mi vida <span class="emoticon">:3</span>, tienes un corazón tan bonito, tan puro... la forma en la que te preocupas por las personas que amas, la forma en la que te esfuerzas por hacer sentir bien a los demás, tu sensibilidad, tu manera de ver el mundo... todo eso me enamora más cada día que pasa <span class="emoticon">&lt;3</span></p>
+
+            <p>Me encanta tu risita cuando algo te da mucha gracia, me encanta cuando te emocionas por las focas y los pandas y empiezas a mandarme stickers de ellos ASKDJKA <span class="emoticon">(●'◡'●)</span>, me encanta cuando me cuentas tus sueños y tus planes, me encanta cuando confías en mí lo suficiente para contarme cuando algo te preocupa o te pone triste... me encanta absolutamente todo de ti, incluso esas cositas que tal vez tú no ves tan especiales pero que para mí lo son todo...</p>
+
+            <p>Sabes que aveces me da cosita pensar en lo afortunado que soy? De verdad no sé qué hice bien en la vida para que una persona tan increíble como tú haya decidido quedarse a mi lado <span class="emoticon">T-T</span> 💕, aveces siento que no merezco tanto amor, tanta paciencia, tanta comprensión como la que tú me das... pero también sé que voy a esforzarme todos los días para ser el mejor chico que pueda ser para ti, para hacerte sentir amada, valorada, especial... porque eso es exactamente lo que eres para mí <span class="emoticon">&lt;3</span></p>
+
+            <p>Y aunque ahora estemos lejos físicamente, quiero que sepas que nunca me he sentido más cerca de alguien como me siento de ti... la distancia es difícil, lo sé, aveces me duele no poder estar ahí contigo cuando sé que me necesitas, no poder abrazarte cuando estás triste, no poder tomarte de la mano cuando caminamos, no poder verte sonreír en persona <span class="emoticon">:(</span>... pero también sé que cada día que pasa nos acerca más a ese momento en el que finalmente vamos a estar juntos...</p>
+
+            <p>Y ese día Cami... ese día va a ser el más hermoso de mi vida <span class="emoticon">T.T</span> 💕, poder finalmente mirarte a los ojos, ver tu sonrisa de cerca, escuchar tu voz sin ninguna pantalla de por medio, poder abrazarte y no soltarte por un buen rato porque he esperado tanto tiempo para eso... poder caminar a tu lado, tomarte de la mano, llevarte a lugares lindos, hacerte reír viéndome hacer el ridículo jeje, compartir tantos momentos que he imaginado mil veces <span class="emoticon">:3</span></p>
+
+            <p>Imagino tantas cosas que quiero hacer contigo cuando nos veamos... quiero llevarte a pasear, quiero que vayamos a ver las focas si hay algún lugar donde podamos verlas jeje, quiero comparte helados, quiero sentarnos en algún parque bonito y solo platicar por horas, quiero tomarte miles de fotos porque sé que vas a estar hermosa, quiero darte todos los abrazos que no he podido darte hasta ahora, quiero simplemente estar contigo y disfrutar cada segundo <span class="emoticon">&lt;3</span></p>
+
+            <p>Y también quiero poder darte regalitos lindos, no porque sienta que tengo que compensar algo, sino porque genuinamente me hace feliz la idea de verte feliz, de sorprenderte con cosas que sé que te van a gustar... quiero poder comprarte esos peluches de focas que tanto te gustan, regalarte tulipanes porque sé cuanto te encantan, llevarte a lugares especiales, hacerte sentir tan especial como tú me haces sentir a mí todos los días <span class="emoticon">T.T</span> 💕</p>
+
+            <p>Mientras tanto, mientras llega ese momento tan esperado, quiero que sepas que cada día pienso en ti, cada día te llevo en mi corazón, cada día agradezco tenerte en mi vida <span class="emoticon">:3</span>, aveces cuando estoy haciendo cualquier cosa random me acuerdo de algo que dijiste o de algo que compartimos y no puedo evitar sonreír... eres mi pensamiento feliz, mi motivación, mi razón para querer ser mejor persona cada día...</p>
+
+            <p>Gracias por ser tan paciente conmigo, por entender cuando estoy ocupado o cuando no puedo responderte tan rápido como quisiera, gracias por siempre tener palabras lindas para mí, por animarme cuando me siento bajoneado, por celebrar conmigo cuando algo bueno me pasa, por simplemente estar ahí <span class="emoticon">&lt;3</span>, no sabes lo mucho que valoro todo eso, cada mensaje tuyo, cada "te amo", cada detalle por más pequeño que sea...</p>
+
+            <p>Y hoy, en tu cumpleaños número 20, quiero que sepas que mis deseos para ti son infinitos... deseo que este nuevo año de tu vida esté lleno de cosas hermosas, de momentos que te hagan feliz, de logros y éxitos en todo lo que te propongas, de risas, de amor, de paz <span class="emoticon">:3</span> 💕, deseo que cada día sea mejor que el anterior, que se cumplan todos tus sueños, que la vida te devuelva todo el amor y la bondad que tú le das al mundo...</p>
+
+            <p>Deseo que sigas siendo esa persona tan increíble que eres, que nunca pierdas esa luz tan linda que tienes, esa capacidad de hacer sentir especial a las personas, esa risita contagiosa, ese corazón tan noble <span class="emoticon">&lt;3</span>, deseo que encuentres felicidad en las pequeñas cosas, que disfrutes cada momento, que te sientas amada y valorada como te mereces...</p>
+
+            <p>Y por supuesto, deseo que pronto, muy pronto, podamos estar juntos en persona, porque ese es uno de mis sueños más grandes <span class="emoticon">T.T</span> 💕, sueño con ese día constantemente, con poder finalmente tenerte cerca, y sé que cuando llegue ese momento va a valer completamente la pena toda esta espera...</p>
+
+            <p>Hoy quiero que disfrutes muchísimo tu día, que te consientan, que te llenen de amor, que comas pastel delicioso jeje, que recibas muchos regalos lindos, que pases tiempo con las personas que amas, que te sientas tan especial como realmente eres <span class="emoticon">:3</span>, y quiero que sepas que aunque no esté ahí físicamente, estoy ahí en espíritu, celebrando contigo, feliz porque mi niña hermosa cumple un año más...</p>
+
+            <p>Gracias por existir Cami, gracias por ser parte de mi vida, gracias por elegirme a mí entre tantas opciones que podrías tener, gracias por tu amor, tu paciencia, tu ternura, tu comprensión, tu cariño... gracias por ser exactamente como eres porque eres perfecta así <span class="emoticon">&lt;3</span> 💕</p>
+
+            <p>Te amo más de lo que las palabras pueden expresar, más de lo que cualquier mensaje, por más largo que sea, podría decir... te amo con todo mi corazón, con cada fibra de mi ser, con cada pensamiento, con cada latido <span class="emoticon">T.T</span>, eres mi persona favorita, mi lugar feliz, mi todo...</p>
+
+            <p>Que tengas el cumpleaños más hermoso mi amor, mi Cami preciosa, mi niña bonita, mi vida entera <span class="emoticon">(●'◡'●)</span> 💕🎂✨</p>
+
+            <p style="text-align: center; font-size: 1.2em; margin-top: 25px; color: #ff69b4;">Te amo infinitamente, feliz cumpleaños mi amor! <span class="emoticon">&lt;3</span></p>
+        </div>
+
+        <div class="tulips">
+            🌷 🌷 🌷 🌷 🌷
+        </div>
+
+        <div class="heart-container">
+            💗 💕 💖 💗 💕
+        </div>
+
+        <div class="footer">
+            <div style="margin-bottom: 15px;">¡Feliz cumpleaños, amor mío!</div>
+            <div style="font-size: 1.2em;">Te amo demasiadooooo! 🎂✨</div>
+        </div>
+
+        <div class="animals" style="margin-top: 30px;">
+            🐼 💝 🦭
         </div>
     </div>
-    
-    <div class="instructions">
-        <p>Toca cada pétalo para descubrir un mensaje especial 💛</p>
-    </div>
-
-    <div class="message" id="messageBox">
-        <button class="close-btn" onclick="closeMessage()">×</button>
-        <div id="messageText"></div>
-    </div>
-
-    <div class="hearts" id="hearts"></div>
 
     <script>
-        const messages = [
-            "Mi Koalita hermoso, eres la luz de mis días y la calma de mis noches... Te amo infinitamente 💛",
-            "Eres mi persona favorita en todo el mundo, mi dulce Koalita... No puedo imaginar mi vida sin ti 🌻",
-            "Tu sonrisa es mi lugar favorito, mi amor... Cada día contigo es un regalo hermoso 💕",
-            "Mi corazón late solo por ti, mi Koalita precioso... Eres mi hogar y mi aventura 🏠",
-            "Contigo he encontrado mi para siempre, mi amor... Eres perfecto tal como eres 🌟",
-            "Mi Koalita lindo, eres mi sol en los días nublados y mi estrella en las noches oscuras ☀️",
-            "Te amo más que a las palabras, más que a los números, más que al infinito mismo 🌙",
-            "Eres mi chico hermoso, mi compañero de vida, mi alma gemela :3... Te adoro completamente 💖",
-            "¡Haz clic en cada pétalo para leer todos los mensajes de amor que tengo para ti mi Koalita Wapo! 🌺"
-        ];
-        
-        const clickedPetals = new Set();
-        let allPetalsClicked = false;
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💕';
+            heart.style.position = 'fixed';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-50px';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            heart.style.animation = `confetti-fall ${Math.random() * 3 + 3}s linear`;
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            document.body.appendChild(heart);
 
-        function showMessage(index) {
-            const messageBox = document.getElementById('messageBox');
-            const messageText = document.getElementById('messageText');
-            
-            messageText.innerHTML = messages[index];
-            messageBox.classList.add('show');
-            
-            createHearts();
-            
-            // Registrar pétalo clickeado
-            if (index < 8) {
-                clickedPetals.add(index);
-                
-                // Verificar si todos los pétalos han sido clickeados
-                if (clickedPetals.size >= 8 && !allPetalsClicked) {
-                    allPetalsClicked = true;
-                    setTimeout(() => {
-                        messageText.innerHTML = "¡Has descubierto todos mis mensajes mi niño :3! Eres el amor de mi vida, mi Koalita 💛";
-                        messageBox.classList.add('show');
-                        createHearts();
-                    }, 1000);
-                }
-            }
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
         }
 
-        function closeMessage() {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.classList.remove('show');
+        // Create hearts periodically
+        setInterval(createHeart, 300);
+
+        // Create initial burst of hearts
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createHeart, i * 100);
         }
-
-        function createHearts() {
-            const heartsContainer = document.getElementById('hearts');
-            
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.innerHTML = '💛';
-                    heart.style.left = Math.random() * 100 + '%';
-                    heart.style.animationDelay = Math.random() * 1000 + 'ms';
-                    heartsContainer.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 3000);
-                }, i * 100);
-            }
-        }
-
-        // Cerrar mensaje al hacer clic fuera
-        document.addEventListener('click', function(event) {
-            const messageBox = document.getElementById('messageBox');
-            if (event.target === messageBox) {
-                closeMessage();
-            }
-        });
-
-        // Cerrar mensaje con tecla Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeMessage();
-            }
-        });
     </script>
 </body>
 </html>
